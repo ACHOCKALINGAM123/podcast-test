@@ -15,6 +15,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: List YAML files
+        run: ls -l *.yaml
+      - name: Show YAML file content
+        run: cat feed.yaml  # or podcast.yaml, whichever you expect
+
+
       # 2. Show workspace structure and files
       - name: Show workspace structure
         run: |
