@@ -10,9 +10,15 @@ print("Loaded YAML data:", yaml_data)
 print("YAML keys:", list(yaml_data.keys()) if yaml_data else "None")
 
 # Open the correct YAML file
-yaml_filename = 'feed.yaml'  # Change to 'podcast.yaml' if that's your file name
-with open(yaml_filename, 'r') as file:
-    yaml_data = yaml.safe_load(file)
+yaml_path = 'feed.yaml'
+try:
+    with open(yaml_path, 'r') as file:
+        yaml_data = yaml.safe_load(file)
+    print("Loaded YAML data:", yaml_data)
+    print("YAML keys:", list(yaml_data.keys()) if yaml_data else "None")
+except Exception as e:
+    print(f"Error loading YAML: {e}")
+    yaml_data = None
 
 print("Loaded YAML data:", yaml_data)
 print("YAML keys:", list(yaml_data.keys()))
