@@ -1,17 +1,27 @@
 import yaml
+import os
 import xml.etree.ElementTree as xml_tree
 
-with open('feed.yaml', 'r') as file:
+# Print working directory and files for debugging
+print("Current working directory:", os.getcwd())
+print("Files in directory:", os.listdir('.'))
+
+print("Loaded YAML data:", yaml_data)
+print("YAML keys:", list(yaml_data.keys()) if yaml_data else "None")
+
+# Open the correct YAML file
+yaml_filename = 'feed.yaml'  # Change to 'podcast.yaml' if that's your file name
+with open(yaml_filename, 'r') as file:
     yaml_data = yaml.safe_load(file)
 
-    rss_element =xml_tree.Element('rss', {'version': '2.0',
-        'xmlns:itunes':'http://www.itunes.com/dtds/podcast-1.0.dtd',
-        'xmlns:content':'http://purl.org/rss/1.0/modules/content/'})
+print("Loaded YAML data:", yaml_data)
+print("YAML keys:", list(yaml_data.keys()))
 
-channel_element =xml_tree.SubElement(rss_element, 'channel')
+link_prefix = yaml_data.get('link')
+if not link_prefix:
+    raise ValueError("The 'link' key is missing from your YAML file!")
 
-link_prefix = yaml_data['link']
-
+# ... rest of your code ...
 xml_tree.SubElement(channel_element, 'title').text = yaml_data['title']
 xml_tree.SubElement(channel_element, 'format').text = yaml_data['format']
 xml_tree.SubElement(channel_element, 'subtitle').text = yaml_data['subtitle']
