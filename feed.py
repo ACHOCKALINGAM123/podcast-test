@@ -6,9 +6,6 @@ import xml.etree.ElementTree as xml_tree
 print("Current working directory:", os.getcwd())
 print("Files in directory:", os.listdir('.'))
 
-print("Loaded YAML data:", yaml_data)
-print("YAML keys:", list(yaml_data.keys()) if yaml_data else "None")
-
 # Open the correct YAML file
 yaml_path = 'feed.yaml'
 try:
@@ -19,6 +16,7 @@ try:
 except Exception as e:
     print(f"Error loading YAML: {e}")
     yaml_data = None
+    exit(1)
 
 print("Loaded YAML data:", yaml_data)
 print("YAML keys:", list(yaml_data.keys()))
