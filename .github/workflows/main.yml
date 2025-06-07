@@ -6,20 +6,33 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensures all files are fetched
+
+      - name: Debug - Verify Files
+        run: ls -la  # Confirm feed.py is present
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pyyaml
+
       - name: Run Feed Generator
-        run: python feed.py
-      - name: Push Repo
-        run:  |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+        run: python /home/runner/work/podcast-test/podcast-test/feed.py  # Runs from root directory
+
+      - name: Print Working Directory
+        run: pwd
+      
+      - name: Push Changes (Optional)
+        if: always()  # Runs even if previous steps fail
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
           git add .
-          git commit -m "Modified Feed"
+          git commit -m "Update generated feeds" || echo "No changes to commit"
           git push
