@@ -25,7 +25,7 @@ jobs:
 
       # 3. Show YAML file content (update filename if needed)
       - name: Show YAML file content
-        run: cat your_yaml_file.yaml
+        run: cat feed.yaml
         # Replace 'your_yaml_file.yaml' with the actual YAML filename
 
       # 4. Set up Python 3.10
