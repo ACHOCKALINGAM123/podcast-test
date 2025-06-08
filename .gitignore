@@ -1,1 +1,4 @@
-I'd like to create a .gitignore for this project. I need some help
+node_modules
+.DS_Store
+.tmp
+npm-debug.log
